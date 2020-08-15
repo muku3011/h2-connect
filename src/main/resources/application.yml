@@ -1,20 +1,32 @@
-spring:
+server:
+  port: 8090
 
-  server:
-    port: 80
+logging:
+  level:
+    ROOT: INFO
+
+spring:
 
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: true
+    open-in-view: false
 
   datasource:
     driverClassName: org.h2.Driver
-    password:
-    url: jdbc:h2:mem:mydb           # in-memory database
-    # url=jdbc:h2:file:/data/demo   # file-based storage
+    # url: jdbc:h2:mem:mydb                                 # in-memory database
+    url: jdbc:h2:file:~/database/mydb;AUTO_SERVER=TRUE      # file-based storage   Windows: jdbc:h2:tcp://localhost:8080//C://Users//<USER>//database//mydb
+                                                            #                      Linux:   jdbc:h2:tcp://188.76.64.224:1512//home//<USER>//database//mydb
     username: sa
+    password:
 
   h2:
+    port: 8080
     console:
+      # Enabling H2 Console
       enabled: true
+      # Custom H2 Console URL
+      path: /h2
+      settings:
+        trace: true
+        web-allow-others: true
 
